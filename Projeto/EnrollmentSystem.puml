@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor Aluno as g
+actor Professor as c
+
+package Sistema-de-Matricula {
+usecase "Fazer matricula" as UC1
+usecase "Cancelar matricula" as UC2
+usecase "Visualizar matriculas" as UC3
+usecase "Notificar sistema de cobrança" as SC
+}
+g --> UC1
+g --> UC2
+c --> UC3
+
+(UC1) .> (SC) : extends
+@enduml
