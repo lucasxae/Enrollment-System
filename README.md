@@ -19,3 +19,12 @@
 ---
 #### US05 - Notificar cobranças
 **Como** sistema de matrículas, **quero** notificar o sistema de cobranças após o aluno se inscrever no semestre, **para** que o aluno seja cobrado corretamente de acordo com as matérias escolhidas. 
+
+---
+#### US06 - Acessar de alunos matriculados
+**Como** um professor, **quero** acessar o sistema e vizualizar a lista de alunos matriculados em cada disciplina que estou lecionando,**para** que eu possa acompanhar e gerenciar os alunos inscritos em minhas turmas.
+
+---
+#### US07 - Autenticação por senha 
+**Como** um usuário do sistema,**quero** utilizar uma senha segura para fazer login no sistema,**para** que eu possa acessar minha conta de forma segura e acessar as funcionalidades que são específicas ao meu perfil.
+
