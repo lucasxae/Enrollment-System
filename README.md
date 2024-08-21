@@ -39,7 +39,7 @@ Neste laboratório, vamos projetar um Sistema de Matrículas para uma Universida
 **Como** um sistema de matrículas, **quero** notificar o sistema de cobranças após o aluno se inscrever no semestre, **para** que o aluno seja cobrado corretamente de acordo com as matérias escolhidas. 
 
 ---
-#### US08 - Acessar de alunos matriculados
+#### US08 - Acessar alunos matriculados
 **Como** um professor, **quero** acessar o sistema e visualizar a lista de alunos matriculados em cada disciplina que estou lecionando, **para** que eu possa acompanhar e gerenciar os alunos inscritos em minhas turmas.
 
 ---
