@@ -43,6 +43,6 @@ Neste laboratório, vamos projetar um Sistema de Matrículas para uma Universida
 **Como** um professor, **quero** acessar o sistema e visualizar a lista de alunos matriculados em cada disciplina que estou lecionando, **para** que eu possa acompanhar e gerenciar os alunos inscritos em minhas turmas.
 
 ---
-#### US10 - Autenticação por senha 
+#### US09 - Autenticação por senha 
 **Como** um usuário do sistema, **quero** utilizar uma senha segura para fazer login, **para** que eu possa acessar minha conta de forma segura e acessar as funcionalidades que são específicas ao meu perfil.
 
