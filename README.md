@@ -17,14 +17,22 @@
 **Como** aluno, **quero** me matricular em uma disciplina optativa, **para** compor a minha grade curricular do semestre e expandir meus conhecimentos para outras áreas.
 
 ---
-#### US05 - Notificar cobranças
-**Como** sistema de matrículas, **quero** notificar o sistema de cobranças após o aluno se inscrever no semestre, **para** que o aluno seja cobrado corretamente de acordo com as matérias escolhidas. 
+#### US05 - Cancelar matrícula
+**Como** aluno, **quero** poder cancelar a matrícula de uma disciplina durante o período de efetuação permitido, **para** que eu possa ajustar a minha grade e carga horária de acordo com as minhas necessidades.
 
 ---
-#### US06 - Acessar de alunos matriculados
-**Como** um professor, **quero** acessar o sistema e vizualizar a lista de alunos matriculados em cada disciplina que estou lecionando,**para** que eu possa acompanhar e gerenciar os alunos inscritos em minhas turmas.
+#### US06 - Verificar informações sobre disciplinas
+**Como** aluno, **quero** saber informações básicas sobre uma disciplina, como status (ativada ou desativada), número de vagas e entre outros, **para** que eu possa planejar meu semestre adequadamente e decidir em quais disciplinas me matricular.
 
 ---
-#### US07 - Autenticação por senha 
-**Como** um usuário do sistema,**quero** utilizar uma senha segura para fazer login no sistema,**para** que eu possa acessar minha conta de forma segura e acessar as funcionalidades que são específicas ao meu perfil.
+#### US07 - Notificação do Sistema de Cobranças
+**Como** um sistema de matrículas, **quero** notificar o sistema de cobranças após o aluno se inscrever no semestre, **para** que o aluno seja cobrado corretamente de acordo com as matérias escolhidas. 
+
+---
+#### US08 - Acessar de alunos matriculados
+**Como** um professor, **quero** acessar o sistema e visualizar a lista de alunos matriculados em cada disciplina que estou lecionando, **para** que eu possa acompanhar e gerenciar os alunos inscritos em minhas turmas.
+
+---
+#### US10 - Autenticação por senha 
+**Como** um usuário do sistema, **quero** utilizar uma senha segura para fazer login, **para** que eu possa acessar minha conta de forma segura e acessar as funcionalidades que são específicas ao meu perfil.
 
