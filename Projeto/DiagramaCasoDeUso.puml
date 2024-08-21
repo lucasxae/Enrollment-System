@@ -2,16 +2,23 @@
 left to right direction
 actor Aluno as g
 actor Professor as c
+actor Secretaria as sec
 
 package Sistema-de-Matricula {
 usecase "Fazer matricula" as UC1
 usecase "Cancelar matricula" as UC2
 usecase "Visualizar matriculas" as UC3
 usecase "Notificar sistema de cobrança" as SC
+usecase "Cancelar disciplinas" as CA
+usecase "Gerar turma" as GA
+usecase "Encerrar inscrições" as EI
 }
 g --> UC1
 g --> UC2
 c --> UC3
+sec --> CA
+sec --> GA
+sec --> EI
 
 (UC1) .> (SC) : extends
 @enduml
