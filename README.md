@@ -1,6 +1,16 @@
+### Laboratório 01 - Sprint 01
+
+Neste laboratório, vamos projetar um Sistema de Matrículas para uma Universidade.
+
+- [x] Diagrama de Caso de Uso em PlantUML
+- [x] Descrição das histórias de usuário em Markdown
+
+---
+### Histórias de Usuário
+
 #### US01 - Gerar currículo semestral
 
-**Como** Secretaria da Universidade, **Quero** gerar um currículo semestral **para** informar os alunos sobre as ofertas de disciplinas e o corpo docente que irá ministrar as matérias.
+**Como** Secretaria da Universidade, **quero** gerar um currículo semestral **para** informar os alunos sobre as ofertas de disciplinas e o corpo docente que irá ministrar as matérias.
 
 ---
 #### US02 - Cadastrar cursos e disciplinas
