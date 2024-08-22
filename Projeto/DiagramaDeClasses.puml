@@ -1,0 +1,56 @@
+@startuml
+Aluno -- Curso
+Curso --* Disciplina
+Turma -- Professor
+Turma -- Aluno
+Turma -- Disciplina
+Aluno -- ICurriculo
+Aluno -- ICobranca
+
+class Curso{
+- nome
+- creditos
+- List<Disciplina> disciplinas
+
+}
+
+interface ICurriculo{
++ gerarCurriculoSemestral(): String
+}
+
+interface ICobranca{
++ notificarCobranca(): void
+}
+
+class Aluno{
+- Curso curso
+- List<Turma> turmas
++ matricularDisciplina(Disciplina disciplina): void
++ checarOptativas(): boolean
++ cancelarMatricula(Disciplina disciplina): boolean
+}
+
+class Professor{
++ checarAlunos(Disciplina disciplina): List<Aluno>
+}
+
+
+class Disciplina{
+- boolean status
+- static int vagas = 60
+- Type tipo
++ checarAlunosMatriculados(): List<Aluno>
++ fecharDisciplina(): void
+
+}
+
+
+
+class Turma {
+- Professor professor
+- List<Aluno> alunos
+- Disciplina disciplina
+}
+
+skinparam classAttributeIconSize 0
+@enduml
