@@ -35,7 +35,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 ---
 #### Histórias de Usuário
 
-##### US01 - Gerar currículo semestral
+#### US01 - Gerar currículo semestral
 
 **Como** Secretaria da Universidade, **quero** gerar um currículo semestral **para** informar os alunos sobre as ofertas de disciplinas e o corpo docente que irá ministrar as matérias.
 
@@ -45,7 +45,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - O currículo pode ser salvo e editado até o início do período de matrículas
 
 ---
-##### US02 - Cadastrar cursos
+#### US02 - Cadastrar cursos
 
 **Como** Secretaria da Universidade, **quero** cadastrar cursos com suas respectivas disciplinas **para** que os alunos possam se matricular e escolher suas matérias de acordo com a necessidade e carga horária.
 
@@ -55,7 +55,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - As disciplinas cadastradas devem aparecer no currículo do semestre
 
 ---
-##### US03 - Matricular em disciplina obrigatória
+#### US03 - Matricular em disciplina obrigatória
 
 **Como** aluno, **quero** me matricular em uma disciplina obrigatória **para**  compor a minha grade curricular do semestre e cumprir os requisitos do meu curso.
 
@@ -66,7 +66,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - As disciplinas selecionadas pelo aluno devem ser salvas e confirmadas após a conclusão do processo de matrícula
 
 ---
-##### US04 - Matricular em disciplina optativa
+#### US04 - Matricular em disciplina optativa
 **Como** aluno, **quero** me matricular em uma disciplina optativa, **para** compor a minha grade curricular do semestre e expandir meus conhecimentos para outras áreas.
 
 **Critérios de Aceite**
@@ -76,7 +76,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - As disciplinas optativas selecionadas devem ser salvas e confirmadas após a conclusão do processo de matrícula
 
 ---
-##### US05 - Cancelar matrícula em disciplina
+#### US05 - Cancelar matrícula em disciplina
 **Como** aluno, **quero** poder cancelar a matrícula de uma disciplina durante o período de efetuação permitido, **para** que eu possa ajustar a minha grade e carga horária de acordo com as minhas necessidades.
 
 **Critérios de Aceite**
@@ -86,7 +86,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - O sistema deve atualizar a lista de disciplinas matriculadas após o cancelamento
 
 ---
-##### US06 - Verificar informações de disciplinas
+#### US06 - Verificar informações de disciplinas
 **Como** aluno, **quero** verificar informações gerais de uma disciplina como turma, professor, número de alunos e status (ativa ou cancelada), **para** que eu possa planejar meu semestre adequadamente.
 
 **Critérios de Aceite**
@@ -94,7 +94,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - O aluno deve ser notificado se a disciplina está ativa ou foi cancelada
 
 ---
-##### US07 - Cancelar disciplina
+#### US07 - Cancelar disciplina
 **Como** Secretaria da Universidade, **quero** cancelar a oferta de uma disciplina, **para** caso a mesma não tenha atingido o número mínimo de inscrições.
 
 **Critérios de Aceite**
@@ -105,7 +105,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - O sistema deve permitir que o aluno escolha outra disciplina em caso da descontinuação da disciplina
 
 ---
-##### US08 - Limite de vagas em disciplinas
+#### US08 - Limite de vagas em disciplinas
 **Como** aluno, **quero** saber o número de vagas disponíveis em cada disciplina durante o processo de matrícula, **para** que eu possa decidir em quais disciplinas me matricular com base na disponibilidade.
 
 **Critérios de Aceite**
@@ -116,7 +116,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - O sistema deve atualizar o número de vagas em função de novas matrículas/cancelamentos
 
 ---
-##### US09 - Notificação do Sistema de Cobranças
+#### US09 - Notificação do Sistema de Cobranças
 **Como** um sistema de matrículas, **quero** notificar o sistema de cobranças após o aluno se inscrever no semestre, **para** que o aluno seja cobrado corretamente de acordo com as matérias escolhidas. 
 
 **Critérios de Aceite**
@@ -126,7 +126,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - O aluno é cobrado corretamente pelas disciplinas selecionadas
 
 ---
-##### US10 - Acessar alunos matriculados
+#### US10 - Acessar alunos matriculados
 **Como** um professor, **quero** acessar o sistema e visualizar a lista de alunos matriculados em cada disciplina que estou lecionando, **para** que eu possa acompanhar e gerenciar os alunos inscritos em minhas turmas.
 
 **Critérios de Aceite**
