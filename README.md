@@ -102,7 +102,7 @@ Todos os usuários do sistema têm senhas que são utilizadas para validação d
 - Se uma disciplina tiver menos de 3 alunos matriculados, ela é cancelada
 - O aluno deve ser notificado se a disciplina for cancelada
 - O sistema deve anular todas as matrículas feitas na disciplina que foi cancelada
-- O sistema deve permitir que o aluno escolha outra disciplina em caso da descontinuação da disciplina
+- O sistema deve permitir que o aluno escolha outra disciplina em caso da descontinuação da disciplina original
 
 ---
 #### US08 - Limite de vagas em disciplinas
