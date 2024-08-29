@@ -25,6 +25,7 @@ interface ICobranca{
 
 class Aluno{
     - curso: Curso
+    - turma: Turma
     + matricularDisciplina(Disciplina disciplina): void
     + checarOptativas(): boolean
     + cancelarMatricula(Disciplina disciplina): boolean
@@ -36,7 +37,6 @@ class Professor{
 }
 
 class Disciplina {
-    - status: Status
     - cargaHoraria: float
     - tipo: Tipo
     - curso: Curso
@@ -58,6 +58,9 @@ class Turma {
     - minAlunos: static int = 3
     - maxAlunos: static int = 60
     - alunos: List<Aluno>
+    + cancelarTurma(): void
+    + adicionarAluno(Aluno aluno): void
+    + removerAluno(Aluno aluno): void
 }
 
 enum Status {
