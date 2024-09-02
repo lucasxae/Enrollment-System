@@ -6,50 +6,68 @@ Turma -- Aluno
 Turma -- Disciplina
 Aluno -- ICurriculo
 Aluno -- ICobranca
+Disciplina -- Tipo
+Turma -- Status
 
 class Curso{
-- nome
-- creditos
-- List<Disciplina> disciplinas
-
+    - nome: String
+    - creditos: int
+    - disciplinas: List<Disciplina> 
 }
 
 interface ICurriculo{
-+ gerarCurriculoSemestral(): String
+    + gerarCurriculoSemestral(): String
 }
 
 interface ICobranca{
-+ notificarCobranca(): void
+    + notificarCobranca(): void
 }
 
 class Aluno{
-- Curso curso
-- List<Turma> turmas
-+ matricularDisciplina(Disciplina disciplina): void
-+ checarOptativas(): boolean
-+ cancelarMatricula(Disciplina disciplina): boolean
+    - curso: Curso
+    - turma: Turma
+    + matricularDisciplina(Disciplina disciplina): void
+    + checarOptativas(): boolean
+    + cancelarMatricula(Disciplina disciplina): boolean
 }
 
 class Professor{
-+ checarAlunos(Disciplina disciplina): List<Aluno>
+    - nome: String
+    + checarAlunos(Disciplina disciplina): List<Aluno>
 }
 
-
-class Disciplina{
-- boolean status
-- static int vagas = 60
-- Type tipo
-+ checarAlunosMatriculados(): List<Aluno>
-+ fecharDisciplina(): void
-
+class Disciplina {
+    - cargaHoraria: float
+    - tipo: Tipo
+    - curso: Curso
+    + checarAlunosMatriculados(): List<Aluno>
+    + fecharDisciplina(): void
 }
 
-
+enum Tipo {
+    - OBRIGATORIA
+    - OPTATIVA
+}
 
 class Turma {
-- Professor professor
-- List<Aluno> alunos
-- Disciplina disciplina
+    - semestre: String
+    - ano: Date
+    - disciplina: Disciplina
+    - professor: Professor
+    - status: Status
+    - minAlunos: static int = 3
+    - maxAlunos: static int = 60
+    - alunos: List<Aluno>
+    + cancelarTurma(): void
+    + adicionarAluno(Aluno aluno): void
+    + removerAluno(Aluno aluno): void
+}
+
+enum Status {
+    - ABERTA
+    - FECHADA
+    - CANCELADA
+    - CONCLUIDA
 }
 
 skinparam classAttributeIconSize 0
