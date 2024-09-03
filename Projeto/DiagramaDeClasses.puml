@@ -4,15 +4,17 @@ Curso --* Disciplina
 Turma -- Professor
 Turma -- Aluno
 Turma -- Disciplina
-Aluno -- ICurriculo
+Curso -- ICurriculo
 Aluno -- ICobranca
-Disciplina -- Tipo
-Turma -- Status
+Disciplina -- TipoDisciplina
+Turma -- StatusTurma
 
 class Curso{
     - nome: String
     - creditos: int
     - disciplinas: List<Disciplina> 
+    + adicionarDisciplina(Disiplina disciplina): void
+    + removerDisciplina(Disciplina disciplina): void
 }
 
 interface ICurriculo{
@@ -24,8 +26,10 @@ interface ICobranca{
 }
 
 class Aluno{
+    - nome: string
     - curso: Curso
-    - turma: Turma
+    - disciplinaObrigatoria: static int
+    - disciplinaOptativa: static int
     + matricularDisciplina(Disciplina disciplina): void
     + checarOptativas(): boolean
     + cancelarMatricula(Disciplina disciplina): boolean
@@ -33,18 +37,23 @@ class Aluno{
 
 class Professor{
     - nome: String
+    - turma: Turma
     + checarAlunos(Disciplina disciplina): List<Aluno>
 }
 
 class Disciplina {
     - cargaHoraria: float
-    - tipo: Tipo
+    - tipo: TipoDisciplins
     - curso: Curso
+    - List<Turma>: turmas
+    - aberta: boolean
     + checarAlunosMatriculados(): List<Aluno>
     + fecharDisciplina(): void
+    + alocarAluno(Aluno aluno): boolean
+    + removerAluno(Aluno aluno): boolean
 }
 
-enum Tipo {
+enum TipoDisciplina {
     - OBRIGATORIA
     - OPTATIVA
 }
@@ -63,7 +72,7 @@ class Turma {
     + removerAluno(Aluno aluno): void
 }
 
-enum Status {
+enum StatusTurma {
     - ABERTA
     - FECHADA
     - CANCELADA
