@@ -73,13 +73,21 @@ public class Turma {
         setStatus(StatusTurma.CONCLUIDA);
     }
 
-    public void adicionarAluno(Aluno aluno) {
+    public boolean adicionarAluno(Aluno aluno) {
         if (this.alunos.size() < maxAlunos) {
             this.alunos.add(aluno);
+            return true;
+        } else{
+            return false;
         }
     }
 
-    public void removerAluno(Aluno aluno) {
+    public boolean removerAluno(Aluno aluno) {
+        if(aluno != null){
         this.alunos.remove(aluno);
+        return true;
+        } else{
+            return false;
+        }
     }
 }
