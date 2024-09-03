@@ -6,6 +6,7 @@ import java.util.List;
 import org.example.Enum.StatusTurma;
 
 public class Turma {
+    private String codigo;
     private Professor professor;
     private List<Aluno> alunos;
     private Disciplina disciplina;
@@ -14,6 +15,14 @@ public class Turma {
     private StatusTurma status;
     private static int minAlunos = 3;
     private static int maxAlunos = 60;
+
+    public String getCodigo() { 
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
     
     public Professor getProfessor() {
         return professor;

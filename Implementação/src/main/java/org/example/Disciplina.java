@@ -6,6 +6,7 @@ import java.util.List;
 import org.example.Enum.TipoDisciplina;
 
 public class Disciplina {
+    private String nome;
     private float cargaHoraria;
     private boolean aberta;
     private Curso curso;
@@ -18,6 +19,14 @@ public class Disciplina {
         this.curso = curso;
         this.tipo = tipo;
         this.turmas = turmas;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome){
+        this.nome = nome;
     }
 
     public float getCargaHoraria(){
