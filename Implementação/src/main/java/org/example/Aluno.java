@@ -1,134 +1,76 @@
 package org.example;
 
-import java.util.List;
-
 import org.example.Enum.DisciplinaType;
 
-/**
- * The Aluno class represents a student enrolled in a course and various
- * classes.
- * It implements the ICobranca and ICurriculo interfaces.
- */
-public class Aluno implements ICobranca, ICurriculo {
+public class Aluno {
 
     private Curso curso;
-    private List<Turma> turmas;
+    private Turma turma;
+    private int qntMatericasOptativas = 0;
+    private  int qntMatericasObrigatorias = 0;
 
-    /**
-     * Gets the course the student is enrolled in.
-     *
-     * @return the course the student is enrolled in
-     */
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
     public Curso getCurso() {
         return curso;
     }
 
-    /**
-     * Sets the course the student is enrolled in.
-     *
-     * @param curso the course to set
-     */
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
 
-    /**
-     * Gets the list of classes the student is enrolled in.
-     *
-     * @return the list of classes the student is enrolled in
-     */
-    public List<Turma> getTurmas() {
-        return turmas;
+    public Aluno(Curso curso, Turma turma) {
+        this.curso = curso;
+        this.turma = turma;
     }
 
-    /**
-     * Sets the list of classes the student is enrolled in.
-     *
-     * @param turmas the list of classes to set
-     */
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
+    public String matricularDisciplina(Disciplina disciplina) {
+        if (disciplina.isStatus()) {
+            disciplina.getTurmas().get(0).getAlunos().add(this);
+            disciplina.setVagas(disciplina.getVagas() - 1);
+            if(disciplina.getTipo().equals(DisciplinaType.OPTATIVA)){
+                qntMatericasOptativas++;
+            }
+            else{
+                qntMatericasObrigatorias++;
+            }
+            return "Matrícula realizada com sucesso!";
+        }
+        return "Matrícula não realizada!";
     }
 
-    /**
-     * Enrolls the student in a given discipline.
-     *
-     * @param disciplina the discipline to enroll in
-     */
-    public void matricularDisciplina(Disciplina disciplina) {
-        var canDoOptives = checarOptativas();
-        var canDoLimits = checarLimites();
-        if(disciplina.isStatus()){
-            throw new IllegalArgumentException("A disciplina já está matriculada");
+    public String cancelarMatricula(Disciplina disciplina) {
+        if (disciplina.isStatus()) {
+            disciplina.getTurmas().get(0).getAlunos().remove(this);
+            disciplina.setVagas(disciplina.getVagas() + 1);
+            if(disciplina.getTipo().equals(DisciplinaType.OPTATIVA)){
+                qntMatericasOptativas--;
+            }
+            else{
+                qntMatericasObrigatorias--;
+            }
+            return "Matrícula cancelada com sucesso!";
         }
-        if (!canDoOptives) {
-         throw new IllegalArgumentException("O aluno já está matriculado em duas disciplinas optativas");
-        }
-
-        if(!canDoLimits){
-            throw new IllegalArgumentException("O aluno já está matriculado em quatro disciplinas obrigatórias");
-        }
-
+        return "Matrícula não cancelada!";
     }
 
-    /**
-     * Checks if the student has enrolled in optional subjects.
-     *
-     * @return true if the student has enrolled in optional subjects, false
-     *         otherwise
-     */
-    public boolean checarOptativas() {
-        var disciplinas = curso.getDisciplinas();
-        var count = 0;
-        for (Disciplina disciplina : disciplinas) {
-            if (disciplina.getTipo() == DisciplinaType.OPTATIVA) {
-                count++;
+    public boolean checarDisponibilidade(Disciplina disciplina) {
+        if (disciplina.getTipo().equals(DisciplinaType.OBRIGATORIA)) {
+            if (qntMatericasObrigatorias < 4 && disciplina.getVagas() > 0) {
+                return true;
+            }
+        } else {
+            if (qntMatericasOptativas < 2 && disciplina.getVagas() > 0) {
+                return true;
             }
         }
-        if (count >= 2)
-            return false;
-
-        return true;
+        throw new IllegalArgumentException("Não é possível matricular-se em mais disciplinas!");
     }
 
-    private boolean checarLimites() {
-        var disciplinas = curso.getDisciplinas();
-        var count = 0;
-        for (Disciplina disciplina : disciplinas) {
-            if (disciplina.getTipo() == DisciplinaType.OBRIGATORIA) {
-                count++;
-            }
-        }
-        if (count >= 4)
-            return false;
-
-        return true;
-    }
-    /**
-     * Cancels the student's enrollment in a given discipline.
-     *
-     * @param disciplina the discipline to cancel enrollment in
-     * @return true if the enrollment was successfully canceled, false otherwise
-     */
-    public boolean cancelarMatricula(Disciplina disciplina) {
-        return true;
-    }
-
-    /**
-     * Notifies the student of a charge.
-     */
-    @Override
-    public void notificarCobranca() {
-        // Implementation here
-    }
-
-    /**
-     * Generates the student's semester curriculum.
-     *
-     * @return a string representing the student's semester curriculum
-     */
-    @Override
-    public String gerarCurriculoSemestral() {
-        return "lab";
-    }
 }
