@@ -56,11 +56,11 @@ public class Aluno {
 
     public boolean checarDisponibilidade(Disciplina disciplina) {
         if (disciplina.getTipo().equals(DisciplinaType.OBRIGATORIA)) {
-            if (discipinaObrigatoria < 4 && disciplina.getVagas() > 0) {
+            if (discipinaObrigatoria < 4) {
                 return true;
             }
         } else {
-            if (disciplinaOptativa < 2 && disciplina.getVagas() > 0) {
+            if (disciplinaOptativa < 2 ) {
                 return true;
             }
         }
