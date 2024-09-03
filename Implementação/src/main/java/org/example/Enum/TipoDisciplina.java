@@ -1,6 +1,6 @@
 package org.example.Enum;
 
-public enum DisciplinaType {
+public enum TipoDisciplina {
     OPTATIVA,
     OBRIGATORIA
 }

@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.Enum.DisciplinaType;
+import org.example.Enum.TipoDisciplina;
 
 public class Aluno {
 
@@ -9,6 +9,14 @@ public class Aluno {
     private static int discipinaObrigatoria = 0;
     private static int disciplinaOptativa = 0;
 
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public Curso getCurso() {
         return curso;
@@ -27,7 +35,7 @@ public class Aluno {
         boolean disponibilidade = checarDisponibilidade(disciplina);
         if (disciplina.getAberta() && disponibilidade) {
            boolean isAlocado =  disciplina.alocarAluno(this);
-            if(disciplina.getTipo().equals(DisciplinaType.OPTATIVA)){
+            if(disciplina.getTipo().equals(TipoDisciplina.OPTATIVA)){
                 disciplinaOptativa++;
             }
             else{
@@ -40,9 +48,9 @@ public class Aluno {
     }
 
     public String cancelarMatricula(Disciplina disciplina) {
-        if (disciplina.isStatus()) {
+        if (disciplina.getAberta()) {
             boolean isAlocado =  disciplina.removerAluno(this);
-            if(disciplina.getTipo().equals(DisciplinaType.OPTATIVA)){
+            if(disciplina.getTipo().equals(TipoDisciplina.OPTATIVA)){
                 disciplinaOptativa--;
             }
             else{
@@ -55,6 +63,7 @@ public class Aluno {
     }
 
     public boolean checarDisponibilidade(Disciplina disciplina) {
+      
         if (disciplina.getTipo().equals(DisciplinaType.OBRIGATORIA)) {
             if (discipinaObrigatoria < 4) {
                 return true;
