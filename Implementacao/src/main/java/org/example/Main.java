@@ -109,7 +109,7 @@ public class Main {
         return turmas;
     }
 
-    private static List<Turma> adicionarTurmas(Scanner s, int qtdTurmas, List<Turma> turmas, String disciplina) throws IOException {
+    private static List<Turma> adicionarTurmas(Scanner s, int qtdTurmas, List<Turma> turmas) throws IOException {
         DaoTurma daoTurma = new DaoTurma();
         for (int i = 1; i <= qtdTurmas; i++) {
             System.out.print("Digite o código da turma " + i + ": ");
@@ -119,13 +119,13 @@ public class Main {
             String nomeProf = s.next();
 
             Professor professor = new Professor(null, nomeProf);
-            Turma turma = new Turma(codigo, professor, new Disciplina(disciplina), "2024.2");
+            Turma turma = new Turma(codigo, professor, null, "2024.2");
 
             turmas.add(turma);
 
 
             professor.adicionarTurma(turma);
-            daoTurma.adcionarTurma(turma);
+          //  daoTurma.adcionarTurma(turma);
 
         }
 
@@ -170,7 +170,7 @@ public class Main {
                     int qtdTurmas = s.nextInt();
 
                     List<Turma> turmas = new ArrayList<>();
-                    turmas = adicionarTurmas(s, qtdTurmas, turmas, Dnome);
+                    turmas = adicionarTurmas(s, qtdTurmas, turmas);
 
                     TipoDisciplina tipo = obterTipoDisciplina(s);
 
