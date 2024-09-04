@@ -1,9 +1,7 @@
 package org.example;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +152,7 @@ public class Main {
                     TipoDisciplina tipo = obterTipoDisciplina(s);
 
                     Disciplina nova = new Disciplina(true, cursoPrincipal, tipo, turmas, Dnome, ch);
-
+                    nova.setTurmas(turmas);
                     cursoPrincipal.adicionarDisciplina(nova);
                     daoDisciplinas.adicionarDisciplinas(nova);
 
@@ -198,8 +196,10 @@ public class Main {
         }
     }
 
-    public static void menuAluno(Aluno aluno) {
+    public static void menuAluno(Aluno aluno) throws IOException {
         Scanner b = new Scanner(System.in);
+        DaoAluno daoAluno = new DaoAluno();
+        DaoDisciplinas daoDisciplinas = new DaoDisciplinas();
         System.out.println("\n[Aluno: " + aluno.getNome() + " - O que deseja fazer?]\n");
         System.out.println("1- Matricular em uma disciplina\n");
         System.out.println("2- Cancelar matricula\n");
@@ -210,66 +210,34 @@ public class Main {
         int opcao = b.nextInt();
 
         switch (opcao) {
-
             case 1:
+
+                List<Disciplina> disc = daoDisciplinas.getAllDisciplinas();
+                System.out.println("Disciplinas:");
+                for (Disciplina disciplina : disc) {
+                    System.out.println(disciplina.getNome());
+                }
+
+                System.out.println("Digite o nome da disciplina: ");
+                String Dnome = b.nextLine();
+
+                Disciplina novaMatricula = daoDisciplinas.getDisciplinaBynome(Dnome);
+                if (novaMatricula == null) {
+                    System.out.println("ERRO: Disciplina não encontrada.");
+                }
+
+                // aluno.matricularDisciplina(novaMatricula);
+                daoAluno.adicionarAluno(aluno);
+
+                break;
+            case 2:
                 try {
-
-                    List<String> disciplinasDisponiveis = new ArrayList<>();
-                    try (BufferedReader reader = new BufferedReader(new FileReader("disciplinas.txt"))) {
-                        String linha;
-                        while ((linha = reader.readLine()) != null) {
-                            disciplinasDisponiveis.add(linha.split(", ")[0]);
-                        }
-                    } catch (IOException e) {
-                        System.out.println("ERRO: Não foi possível ler o arquivo de disciplinas.");
-                        break;
-                    }
-
-                    // Exibir a lista de disciplinas para o aluno escolher
-                    System.out.println("Disciplinas disponíveis:");
-                    for (int i = 0; i < disciplinasDisponiveis.size(); i++) {
-                        System.out.println((i + 1) + " - " + disciplinasDisponiveis.get(i));
-                    }
-
-                    // Solicitar ao aluno que selecione uma disciplina
-                    System.out.print("Digite o número da disciplina em que deseja se matricular: ");
-                    int escolha = b.nextInt();
-                    b.nextLine(); // Consumir a nova linha
-
-                    if (escolha < 1 || escolha > disciplinasDisponiveis.size()) {
-                        System.out.println("ERRO: Opção inválida.");
-                        break;
-                    }
-
-                    String nomeDisciplina = disciplinasDisponiveis.get(escolha - 1);
-
-                    // Adicionar o aluno à lista de alunos da turma da disciplina
-                    List<Disciplina> disciplinasDoCurso = aluno.getCurso().getDisciplinas();
-                    for (Disciplina disciplina : disciplinasDoCurso) {
-                        if (disciplina.getNome().equals(nomeDisciplina)) {
-                            List<Turma> turmas = lerTurmasDoArquivo("turmas.txt");
-                            if (!turmas.isEmpty()) {
-                                Turma turma = turmas.get(0);
-                                turma.adicionarAluno(aluno);
-
-                                // Salvar a matrícula do aluno em um arquivo .txt
-                                try (BufferedWriter writer = new BufferedWriter(
-                                        new FileWriter("matriculas.txt", true))) {
-                                    writer.write("Aluno: " + aluno.getNome() + ", Disciplina: " + nomeDisciplina);
-                                    writer.newLine();
-                                } catch (IOException e) {
-                                    System.out.println("ERRO: Não foi possível salvar a matrícula no arquivo.");
-                                }
-
-                                System.out.println("Matrícula realizada com sucesso!");
-                            } else {
-                                System.out.println("ERRO: Não há turmas disponíveis para esta disciplina.");
-                            }
-                            break;
-                        }
-                    }
+                    System.out.print("Digite o nome da disciplina que deseja cancelar a matrícula: ");
+                    String nomeDisciplina = b.next();
+                    Disciplina disciplina = new Disciplina(nomeDisciplina);
+                    aluno.cancelarMatricula(disciplina);
                 } catch (Exception e) {
-                    System.out.println("ERRO: Não foi possível realizar a matrícula.");
+                    System.out.println("ERRO: Não foi possível cancelar a matrícula.");
                 }
                 break;
 

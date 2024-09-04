@@ -1,1 +1,3 @@
 Matheus, null, null .
+lucas, org.example.Curso@69d0a921, 
+ljcas, Engenharia de Software, 

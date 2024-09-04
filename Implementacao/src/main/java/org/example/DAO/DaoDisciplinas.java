@@ -28,42 +28,42 @@ public class DaoDisciplinas {
     }
 
     public List<Disciplina> getAllDisciplinas() throws IOException {
-    List<Disciplina> disciplinas = new ArrayList<>();
-    BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
-    String line;
-    while ((line = br.readLine()) != null) {
-        String[] dados = line.split(", ");
-        if (dados.length >= 5) {
-            String nome = dados[0].trim();
-            TipoDisciplina tipo = TipoDisciplina.valueOf(dados[1].trim());
-            float cargaHoraria = Float.parseFloat(dados[3].trim());
-            Curso curso = new Curso(dados[4].trim(), 2.0);
+        List<Disciplina> disciplinas = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] dados = line.split(", ");
+            if (dados.length >= 5) {
+                String nome = dados[0].trim();
+                TipoDisciplina tipo = TipoDisciplina.valueOf(dados[1].trim());
+                float cargaHoraria = Float.parseFloat(dados[3].trim());
+                Curso curso = new Curso(dados[4].trim(), 2.0);
 
-            List<Turma> turmas = new ArrayList<>();
-            for (int i = 5; i < dados.length; i += 2) {
-                String codigoTurma = dados[i].trim();
-                String nomeProfessor = dados[i + 1].trim();
-                Professor professor = new Professor(null, nomeProfessor);
-                Turma turma = new Turma(codigoTurma, professor, null, null);
-                turmas.add(turma);
+                List<Turma> turmas = new ArrayList<>();
+                for (int i = 5; i < dados.length; i += 2) {
+                    String codigoTurma = dados[i].trim();
+                    String nomeProfessor = dados[i + 1].trim();
+                    Professor professor = new Professor(null, nomeProfessor);
+                    Turma turma = new Turma(codigoTurma, professor, null, null);
+                    turmas.add(turma);
+                }
+
+                Disciplina objDisciplina = new Disciplina(true, curso, tipo, turmas, nome, cargaHoraria);
+                disciplinas.add(objDisciplina);
             }
-
-            Disciplina objDisciplina = new Disciplina(true, curso, tipo, turmas, nome, cargaHoraria);
-            disciplinas.add(objDisciplina);
         }
+        br.close();
+        return disciplinas;
     }
-    br.close();
-    return disciplinas;
-}
 
     public Disciplina getDisciplinaBynome(String nome) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
         String line;
         while ((line = br.readLine()) != null) {
             String[] dados = line.split(",");
-            if (dados.length == 4 && dados[0].equals(nome)) {
+            if (dados.length == 6 && dados[0].equals(nome)) {
                 br.close();
-                return new Disciplina(dados[0]);
+                return new Disciplina(dados[0], TipoDisciplina.valueOf(dados[1].trim()), true);
             }
         }
         br.close();

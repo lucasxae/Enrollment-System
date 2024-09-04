@@ -11,7 +11,7 @@ public class Disciplina {
     private boolean aberta;
     private Curso curso;
     private TipoDisciplina tipo;
-    private List<Turma> turmas;
+    private List<Turma> turmas = new ArrayList<>();
 
     public Disciplina(boolean aberta, Curso curso, TipoDisciplina tipo, List<Turma> turmas, String nome,
             Float cargahoraria) {
@@ -25,6 +25,12 @@ public class Disciplina {
 
     public Disciplina(String nome) {
         this.nome = nome;
+    }
+
+    public Disciplina(String nome, TipoDisciplina tipo, boolean aberta) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.aberta = aberta;
     }
 
     public String getNome() {
@@ -92,7 +98,8 @@ public class Disciplina {
     }
 
     public boolean alocarAluno(Aluno aluno) {
-        for (int i = 0; i < turmas.size(); i++) {
+
+        for (int i = 0; i < turmas.size() + 1; i++) {
             List<Aluno> alunos = turmas.get(i).getAlunos();
             for (int x = 0; x < alunos.size(); x++) {
                 if (alunos.get(x).getNome().equals(aluno.getNome())) {

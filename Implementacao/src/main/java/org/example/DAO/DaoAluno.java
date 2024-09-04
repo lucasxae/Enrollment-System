@@ -15,8 +15,8 @@ public class DaoAluno {
 
     public void adicionarAluno(Aluno objAluno) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true));
-        String line = objAluno.getNome() + ", " + objAluno.getCurso() + ", "
-                + objAluno.getCurso().getDisciplinas().get(0).getTurmas() + " .";
+        String line = objAluno.getNome() + ", " + objAluno.getCurso().getNome() + ", ";
+        // + objAluno.getCurso().getDisciplinas().get(0).getTurmas() + " .";
         bw.write(line);
         bw.newLine();
         bw.close();

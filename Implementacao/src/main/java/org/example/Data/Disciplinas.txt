@@ -1,1 +1,2 @@
 Programacoa Modular, OBRIGATORIA, , 80.0, Engenharia de Software, 
+Teste, OBRIGATORIA, , 20.0, Engenharia de Software,  Caram, 22
