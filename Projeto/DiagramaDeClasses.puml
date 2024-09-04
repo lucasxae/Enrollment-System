@@ -39,6 +39,7 @@ class Professor{
     - nome: String
     - turma: Turma
     + checarAlunos(Disciplina disciplina): List<Aluno>
+    + adicionarTurma(Turma turma): void
 }
 
 class Disciplina {
