@@ -7,19 +7,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.example.Curso;
 import org.example.Disciplina;
 
 public class DaoCurso {
-    private static final String FILE_PATH="Implementação//src//main//javaorg//example//Data//Cursos.txt";
+    private static final String FILE_PATH="Enrollment-System\\Implementação\\src\\main\\java\\org\\example\\Data\\Cursos.txt";
 
     public void adcionarCurso(Curso cursoObj)throws IOException{
         BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH,true));
-        String disciplinas=cursoObj.getDisciplinas().stream()
-        .map(Disciplina::toString)
-        .collect(Collectors.joining(";"));
+        String disciplinas="";
+        List<Disciplina> listDeDisciplinas=cursoObj.getDisciplinas();
+        for(Disciplina d:listDeDisciplinas){
+            disciplinas+= d.getNome()+", ";
+            
+        }
+        
         String line= cursoObj.getNome()+", "+cursoObj.getCreditos()+", "+disciplinas;
         bw.write(line);
         bw.newLine();
@@ -60,7 +63,12 @@ public class DaoCurso {
         List<Curso> cursos=getAllCursos();
         BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH));
         for (Curso curso:cursos) {
-            String disciplinas=String.join(", ",cursoAtualizado.getDisciplinas().toString());
+            String disciplinas="";
+            List<Disciplina> listDeDisciplinas=cursoAtualizado.getDisciplinas();
+            for(Disciplina d:listDeDisciplinas){
+                disciplinas+= d.getNome()+", ";
+                
+            }
             bw.write(cursoAtualizado.getNome()+", "+cursoAtualizado.getNome()+", "+curso.getCreditos()+", "+disciplinas);
             bw.newLine(); 
         }

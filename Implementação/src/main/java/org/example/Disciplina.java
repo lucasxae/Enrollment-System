@@ -121,4 +121,12 @@ public class Disciplina {
         }
         return false;
     }
+    public String getStringDeTurmas(){
+        String turmasS="";
+        for(Turma t:this.turmas){
+            turmasS+=" "+t.getProfessor().getNome()+", "+t.getCodigo();
+        }
+
+        return turmasS;
+    }
 }

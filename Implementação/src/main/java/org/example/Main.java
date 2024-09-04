@@ -24,6 +24,7 @@ public class Main {
         Curso cursoPrincipal = new Curso("Engenharia de Software", 180.00);
         Aluno alunoLogado = null;
         Professor profLogado = null;
+        daoCurso.adcionarCurso(cursoPrincipal);
 
         while (true) {
             System.out.println("\n[Sistema de Matrículas - Menu principal]\n");
@@ -79,6 +80,8 @@ public class Main {
 
             turmas.add(turma);
             professor.adicionarTurma(turma);
+            
+            
         }
 
         return turmas;
@@ -129,7 +132,8 @@ public class Main {
                     Disciplina nova = new Disciplina(true, cursoPrincipal, tipo, turmas, Dnome, ch);
 
                     cursoPrincipal.adicionarDisciplina(nova);
-                    // daoDisciplinas.adicionarDisciplinas(nova);
+                    daoDisciplinas.adicionarDisciplinas(nova);
+                    
                 } catch (Exception e) {
                     System.out.println("ERRO: Não foi possivel adicionar uma nova disciplina.");
                 }
@@ -146,7 +150,7 @@ public class Main {
                         Disciplina disciplina = iterator.next();
                         if (disciplina.getNome().equals(nomeDisciplina)) {
                             iterator.remove();
-                            // daoDisciplinas.removerDisciplina(disciplina.getNome());
+                            daoDisciplinas.removerDisciplina(disciplina.getNome());
                         }
                     }
                 } catch (Exception e) {

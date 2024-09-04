@@ -8,16 +8,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.example.Curso;
 import org.example.Disciplina;
+import org.example.Enum.TipoDisciplina;
+import org.example.Turma;
 
 public class DaoDisciplinas {
-    private static final String FILE_PATH = "Implementação//src//main//java//org//example//Disciplina.java";
+    private static final String FILE_PATH = "Enrollment-System\\Implementação\\src\\main\\java\\org\\example\\Data\\Disciplinas.txt";
 
     public void adicionarDisciplinas(Disciplina objDisciplina) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true));
         String line = objDisciplina.getNome() + ", " + objDisciplina.getTipo() + ", " + ", "
-                + objDisciplina.getCargaHoraria() + ", " + objDisciplina.getCurso().getNome() + ", "
-                + objDisciplina.getTurmas().toString();
+                + objDisciplina.getCargaHoraria() + ", " + objDisciplina.getCurso().getNome() + ", "+objDisciplina.getStringDeTurmas();
         bw.write(line);
         bw.newLine();
         bw.close();
@@ -70,15 +72,36 @@ public class DaoDisciplinas {
     }
 
     public void removerDisciplina(String nome) throws IOException {
-        List<Disciplina> disciplinas = getAllDisciplinas();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH));
-        for (Disciplina disciplina : disciplinas) {
-            if (!disciplina.getNome().equals(nome)) {
-                bw.write(disciplina.getNome() + ", " + disciplina.getTipo() + ", " + disciplina.getCargaHoraria() + ", "
-                        + disciplina.getCurso().getNome());
-                bw.newLine();
+    List<Disciplina> disciplinas = new ArrayList<>();
+    BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
+    String line;
+
+    while ((line = br.readLine()) != null) {
+        String[] dados = line.split(",");
+
+
+        if (dados.length >= 5) {
+            String nomeDisciplina = dados[0].trim();
+            TipoDisciplina tipo = TipoDisciplina.valueOf(dados[1].trim());
+            float cargaHoraria = Float.parseFloat(dados[3].trim());
+            Curso curso = new Curso(dados[4].trim(),null); 
+
+            List<Turma> turmas = new ArrayList<>(); 
+            
+            if (!nomeDisciplina.equals(nome)) {
+                disciplinas.add(new Disciplina(true, curso, tipo, turmas, nomeDisciplina, cargaHoraria));
             }
         }
+    }
+    br.close();
+
+   
+    BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH));
+    for (Disciplina disciplina : disciplinas) {
+        bw.write(disciplina.getNome() + ", " + disciplina.getTipo() + ", , " + disciplina.getCargaHoraria() + ", "
+                + disciplina.getCurso().getNome() + ", " + disciplina.getStringDeTurmas());
         bw.newLine();
     }
+    bw.close();
+}
 }

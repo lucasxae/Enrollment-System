@@ -1,0 +1,4 @@
+AEDS 1, OBRIGATORIA, , 80.0, Engenharia de Software, [org.example.Turma@c4437c4]
+A, OBRIGATORIA, , 80.0, Engenharia de Software, 
+SO, OBRIGATORIA, , 40.0, Engenharia de Software, 
+AED 3, OBRIGATORIA, , 40.0, Engenharia de Software,  Luiz, 001
