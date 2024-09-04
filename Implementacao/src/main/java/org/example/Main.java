@@ -1,5 +1,9 @@
 package org.example;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,6 +26,7 @@ public class Main {
         DaoProfessor daoProfessor = new DaoProfessor();
 
         Curso cursoPrincipal = new Curso("Engenharia de Software", 180.00);
+
         Aluno alunoLogado = null;
         Professor profLogado = null;
         daoCurso.adcionarCurso(cursoPrincipal);
@@ -44,7 +49,8 @@ public class Main {
                     if (alunoLogado == null) {
                         System.out.print("Digite seu nome: ");
                         String nomeAluno = scanner.nextLine();
-                        alunoLogado = daoAluno.getByName(nomeAluno);
+                        alunoLogado = new Aluno(nomeAluno);
+                        alunoLogado.setCurso(cursoPrincipal);
                         menuAluno(alunoLogado);
                     }
                     break;
@@ -67,6 +73,27 @@ public class Main {
         }
     }
 
+
+    private static List<Turma> lerTurmasDoArquivo(String filePath) {
+        List<Turma> turmas = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(", ");
+                if (dados.length == 2) {
+                    String codigo = dados[0];
+                    String nomeProfessor = dados[1];
+                    Professor professor = new Professor(null, nomeProfessor);
+                    Turma turma = new Turma(codigo, professor, null, null);
+                    turmas.add(turma);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("ERRO: Não foi possível ler o arquivo de turmas.");
+        }
+        return turmas;
+    }
+
     private static List<Turma> adicionarTurmas(Scanner s, int qtdTurmas, List<Turma> turmas) {
         for (int i = 1; i <= qtdTurmas; i++) {
             System.out.print("Digite o código da turma " + i + ": ");
@@ -80,8 +107,7 @@ public class Main {
 
             turmas.add(turma);
             professor.adicionarTurma(turma);
-            
-            
+
         }
 
         return turmas;
@@ -133,7 +159,7 @@ public class Main {
 
                     cursoPrincipal.adicionarDisciplina(nova);
                     daoDisciplinas.adicionarDisciplinas(nova);
-                    
+
                 } catch (Exception e) {
                     System.out.println("ERRO: Não foi possivel adicionar uma nova disciplina.");
                 }
@@ -142,17 +168,7 @@ public class Main {
                 try {
                     System.out.print("Digite o nome da disciplina que deseja excluir: ");
                     String nomeDisciplina = s.nextLine();
-
-                    List<Disciplina> disciplinasDoCurso = cursoPrincipal.getDisciplinas();
-
-                    Iterator<Disciplina> iterator = disciplinasDoCurso.iterator();
-                    while (iterator.hasNext()) {
-                        Disciplina disciplina = iterator.next();
-                        if (disciplina.getNome().equals(nomeDisciplina)) {
-                            iterator.remove();
-                            daoDisciplinas.removerDisciplina(disciplina.getNome());
-                        }
-                    }
+                    daoDisciplinas.removerDisciplina(nomeDisciplina);
                 } catch (Exception e) {
                     System.out.println("ERRO: Não foi possivel excluir esta disciplina.");
                 }
@@ -165,20 +181,17 @@ public class Main {
                     System.out.println("ERRO: Não foi possivel gerar o currículo.");
                 }
                 break;
-            case 4:
-                try {
-                    List<Disciplina> disciplinas = cursoPrincipal.getDisciplinas();
-                    if (disciplinas.isEmpty()) {
-                        System.out.println("ERRO: Não existem disciplinas cadastradas.");
-                    }
-                    for (Disciplina disciplina : disciplinas) {
-                        System.out.println("Disciplinas: ");
-                        System.out.println(disciplina.getNome());
-                    }
-                } catch (Exception e) {
-                    System.out.println("ERRO: Não foi possivel listar as disciplinas.");
-                }
-                break;
+           case 4:
+    try {
+        List<Disciplina> disc = daoDisciplinas.getAllDisciplinas();
+        System.out.println("Disciplinas:");
+        for (Disciplina disciplina : disc) {
+            System.out.println(disciplina.getNome());
+        }
+    } catch (Exception e) {
+        System.out.println("ERRO: Não foi possivel listar as disciplinas.");
+    }
+    break;
             case 5:
                 System.out.println("Voltando para o menu principal. . .");
                 return;
@@ -199,43 +212,69 @@ public class Main {
         int opcao = b.nextInt();
 
         switch (opcao) {
+
             case 1:
-                List<Disciplina> disciplinasDisponiveis = aluno.getCurso().getDisciplinas();
-                for (Disciplina disciplina : disciplinasDisponiveis) {
-                    System.out.println("Disciplina: " + disciplina.getNome());
-                    String nomeDisciP = b.nextLine();
-                    for (Disciplina d : disciplinasDisponiveis) {
-                        if (d.getNome().equals(nomeDisciP)) {
-                            aluno.matricularDisciplina(d);
-                        }
-                    }
-                    try {
-
-                    } catch (Exception e) {
-                        System.out.println("ERRO: Não foi possivel cadastrar na disciplina.");
-                    }
-                }
-                break;
-            case 2:
                 try {
-                    List<Disciplina> disciplinasDocurso = aluno.getCurso().getDisciplinas();
-                    for (Disciplina disciplinaP : disciplinasDocurso) {
-                        List<Turma> listaDeTurmas = disciplinaP.getTurmas();
-                        for (Turma turma : listaDeTurmas) {
-                            List<Aluno> alunos = turma.getAlunos();
-                            for (Aluno procurado : alunos) {
-                                if (procurado.getNome().equals(aluno.getNome())) {
-                                    procurado = aluno;
-                                    procurado.matricularDisciplina(disciplinaP);
-                                }
-                            }
+
+                    List<String> disciplinasDisponiveis = new ArrayList<>();
+                    try (BufferedReader reader = new BufferedReader(new FileReader("disciplinas.txt"))) {
+                        String linha;
+                        while ((linha = reader.readLine()) != null) {
+                            disciplinasDisponiveis.add(linha.split(", ")[0]);
                         }
+                    } catch (IOException e) {
+                        System.out.println("ERRO: Não foi possível ler o arquivo de disciplinas.");
+                        break;
                     }
 
+                    // Exibir a lista de disciplinas para o aluno escolher
+                    System.out.println("Disciplinas disponíveis:");
+                    for (int i = 0; i < disciplinasDisponiveis.size(); i++) {
+                        System.out.println((i + 1) + " - " + disciplinasDisponiveis.get(i));
+                    }
+
+                    // Solicitar ao aluno que selecione uma disciplina
+                    System.out.print("Digite o número da disciplina em que deseja se matricular: ");
+                    int escolha = b.nextInt();
+                    b.nextLine(); // Consumir a nova linha
+
+                    if (escolha < 1 || escolha > disciplinasDisponiveis.size()) {
+                        System.out.println("ERRO: Opção inválida.");
+                        break;
+                    }
+
+                    String nomeDisciplina = disciplinasDisponiveis.get(escolha - 1);
+
+                    // Adicionar o aluno à lista de alunos da turma da disciplina
+                    List<Disciplina> disciplinasDoCurso = aluno.getCurso().getDisciplinas();
+                    for (Disciplina disciplina : disciplinasDoCurso) {
+                        if (disciplina.getNome().equals(nomeDisciplina)) {
+                            List<Turma> turmas = lerTurmasDoArquivo("turmas.txt");
+                            if (!turmas.isEmpty()) {
+                                Turma turma = turmas.get(0);
+                                turma.adicionarAluno(aluno);
+
+                                // Salvar a matrícula do aluno em um arquivo .txt
+                                try (BufferedWriter writer = new BufferedWriter(
+                                        new FileWriter("matriculas.txt", true))) {
+                                    writer.write("Aluno: " + aluno.getNome() + ", Disciplina: " + nomeDisciplina);
+                                    writer.newLine();
+                                } catch (IOException e) {
+                                    System.out.println("ERRO: Não foi possível salvar a matrícula no arquivo.");
+                                }
+
+                                System.out.println("Matrícula realizada com sucesso!");
+                            } else {
+                                System.out.println("ERRO: Não há turmas disponíveis para esta disciplina.");
+                            }
+                            break;
+                        }
+                    }
                 } catch (Exception e) {
-                    System.out.println("ERRO: Não foi possivel cancelar a matrícula desta disciplina.");
+                    System.out.println("ERRO: Não foi possível realizar a matrícula.");
                 }
                 break;
+
             case 3:
                 System.out.println("Voltando para o menu principal. . .");
                 return;

@@ -11,7 +11,7 @@ import java.util.List;
 import org.example.Turma;
 
 public class DaoTurma {
-    private static final String FILE_PATH = "Implementação//src//main//java//org//example//Data//Turmas.txt";
+    private static final String FILE_PATH = "Implementacao//src//main//java//org//example//Data//Turmas.txt";
 
     public void adcionarTurma(Turma objTurma) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH));
