@@ -55,18 +55,18 @@ public class Main {
 
                             Aluno novo= new Aluno(cursoPrincipal, nomeAl);
                             daoAluno.adicionarAluno(novo);
+                            alunoLogado = novo;
                             novo.setCurso(cursoPrincipal);
                             System.out.println("Cadastro efetuado");
-                            return;
-
+                            break;
                             case 2:
-                            return ;
+                            break;
+                            
                             default:
                             System.out.println("Opção invalida");
                         }
                     }else{
                     }
-                    alunoLogado.setCurso(cursoPrincipal);
                     menuAluno(alunoLogado);
                 }
                     break;
@@ -246,6 +246,8 @@ public class Main {
 
                 System.out.println("Digite o nome da disciplina: ");
                 String Dnome = b.next();
+
+                
 
                 Disciplina novaMatricula = daoDisciplinas.getDisciplinaBynome(Dnome);
                 if (novaMatricula == null) {
