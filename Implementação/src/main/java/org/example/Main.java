@@ -154,7 +154,8 @@ public class Main {
                 }
             case 3:
                 try {
-                    cursoPrincipal.gerarCurriculoSemestral();
+                    String curriculo = cursoPrincipal.gerarCurriculoSemestral();
+                    System.out.println(curriculo);
                 } catch (Exception e) {
                     System.out.println(e);
                     System.out.println("ERRO: Não foi possivel gerar o currículo.");
