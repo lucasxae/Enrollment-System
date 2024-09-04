@@ -11,7 +11,9 @@ import java.util.List;
 import org.example.Professor;
 
 public class DaoProfessor {
-    private static final String FILE_PATH = "Enrollment-System\\Implementacao\\src\\main\\java\\org\\example\\Data\\Professores.txt";
+
+    public static final String FILE_PATH = "Enrollment-System\\Implementacao\\src\\main\\java\\org\\example\\Data\\Cursos.txt";
+
 
     public void adicionarProfessor(Professor prof) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH));

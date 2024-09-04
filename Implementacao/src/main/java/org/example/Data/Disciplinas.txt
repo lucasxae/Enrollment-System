@@ -1,3 +1,11 @@
-Programacoa Modular, OBRIGATORIA, , 80.0, Engenharia de Software, 
-Teste, OBRIGATORIA, , 20.0, Engenharia de Software,  Caram, 22
-PM, OPTATIVA, , 20.0, Engenharia de Software,  Joao, 1.1
+
+Programacoa Modular, OBRIGATORIA, , 80.0, Engenharia de Software,
+Algoritmos, OBRIGATORIA, , 60.0, Engenharia de Software,
+Estruturas de Dados, OBRIGATORIA, , 70.0, Engenharia de Software,
+Banco de Dados, OBRIGATORIA, , 50.0, Engenharia de Software,
+Engenharia de Software, OBRIGATORIA, , 90.0, Engenharia de Software,
+Sistemas Operacionais, OBRIGATORIA, , 80.0, Engenharia de Software,
+Redes de Computadores, OBRIGATORIA, , 75.0, Engenharia de Software,
+Inteligencia Artificial, OBRIGATORIA, , 85.0, Engenharia de Software,
+Seguranca da Informacao, OBRIGATORIA, , 65.0, Engenharia de Software,teste, OBRIGATORIA, , 1.0, Engenharia de Software,  1, 1
+1, OBRIGATORIA, , 1.0, Engenharia de Software,  1, 1
