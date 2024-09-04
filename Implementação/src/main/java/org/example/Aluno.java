@@ -65,7 +65,6 @@ public class Aluno {
     }
 
     public boolean checarDisponibilidade(Disciplina disciplina) {
-
         if (disciplina.getTipo().equals(TipoDisciplina.OBRIGATORIA)) {
             if (discipinaObrigatoria < 4) {
                 return true;
@@ -77,5 +76,4 @@ public class Aluno {
         }
         throw new IllegalArgumentException("Não é possível matricular-se em mais disciplinas!");
     }
-
 }

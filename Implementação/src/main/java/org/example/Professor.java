@@ -32,4 +32,8 @@ public class Professor {
         return disciplina.checarAlunosMatriculados(); 
     };
 
+    public void adicionarTurma(Turma turma){
+        this.turma = turma;
+    }
+
 }

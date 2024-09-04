@@ -25,6 +25,7 @@ public class DaoCurso {
         bw.newLine();
         bw.close();
     }
+
     public List<Curso> getAllCursos() throws IOException{
         List<Curso> cursos= new ArrayList<>();
         BufferedReader br= new BufferedReader(new FileReader(FILE_PATH));
@@ -41,6 +42,7 @@ public class DaoCurso {
         return cursos;
         
     }
+
     public Curso getCursoByNome(String nome) throws IOException{
         BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
         String line;
@@ -53,6 +55,7 @@ public class DaoCurso {
         }
         return null;
     }
+
     public void atualizarCurso(Curso cursoAtualizado) throws IOException{
         List<Curso> cursos=getAllCursos();
         BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH));
@@ -63,6 +66,7 @@ public class DaoCurso {
         }
         bw.close();
     }
+    
     public void removerCurso(String nome)throws IOException{
        List<Curso> cursos= getAllCursos();
        BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH));

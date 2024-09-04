@@ -1,35 +1,42 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Curso implements ICurriculo {
     private String nome;
     private double creditos;
-    
-    public Curso(String nome, Double creditos){
-        this.creditos=creditos;
-        this.nome=nome;
+    private List<Disciplina> disciplinas;
+
+    public Curso(String nome, Double creditos) {
+        this.creditos = creditos;
+        this.nome = nome;
+        this.disciplinas = new ArrayList<>();
     }
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public double getCreditos() {
         return creditos;
     }
+
     public void setCreditos(double creditos) {
         this.creditos = creditos;
     }
+
     public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
+
     public void setDisciplinas(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
-
-    private List<Disciplina> disciplinas;
 
     public void adicionarDisciplina(Disciplina disciplina) {
         this.disciplinas.add(disciplina);
@@ -45,7 +52,7 @@ public class Curso implements ICurriculo {
         curriculo.append("Curso: ").append(this.nome).append("\n");
         curriculo.append("Créditos: ").append(this.creditos).append("\n");
         curriculo.append("Disciplinas:\n");
-    
+
         for (Disciplina disciplina : disciplinas) {
             curriculo.append("\n  Nome: ").append(disciplina.getNome()).append("\n");
             curriculo.append("  Professores:\n");
@@ -62,5 +69,4 @@ public class Curso implements ICurriculo {
         }
         return curriculo.toString();
     }
-    
 }

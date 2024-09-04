@@ -12,36 +12,37 @@ public class Disciplina {
     private Curso curso;
     private TipoDisciplina tipo;
     private List<Turma> turmas;
-    
-    
-    public Disciplina(boolean aberta, Curso curso, TipoDisciplina tipo, List<Turma> turmas,String nome,Float cargahoraria) {
+
+    public Disciplina(boolean aberta, Curso curso, TipoDisciplina tipo, List<Turma> turmas, String nome,
+            Float cargahoraria) {
         this.aberta = aberta;
         this.curso = curso;
         this.tipo = tipo;
         this.turmas = turmas;
-        this.cargaHoraria=cargahoraria;
-        this.nome=nome;
+        this.cargaHoraria = cargahoraria;
+        this.nome = nome;
     }
-    public Disciplina(String nome){
-        this.nome=nome;
+
+    public Disciplina(String nome) {
+        this.nome = nome;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome){
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public float getCargaHoraria(){
+    public float getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(float cargaHoraria){
+    public void setCargaHoraria(float cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
-    
+
     public boolean getAberta() {
         return aberta;
     }
@@ -90,37 +91,34 @@ public class Disciplina {
         aberta = false;
     }
 
-    public boolean alocarAluno(Aluno aluno){
-            for (int i = 0; i < turmas.size(); i++) {
-                List<Aluno> alunos = turmas.get(i).getAlunos();
-                for (int x = 0; x < alunos.size(); x++) {
-                    if (alunos.get(x).getNome().equals(aluno.getNome())) {
-                        return false; 
-                    }
+    public boolean alocarAluno(Aluno aluno) {
+        for (int i = 0; i < turmas.size(); i++) {
+            List<Aluno> alunos = turmas.get(i).getAlunos();
+            for (int x = 0; x < alunos.size(); x++) {
+                if (alunos.get(x).getNome().equals(aluno.getNome())) {
+                    return false;
                 }
             }
-        
-            for (int i = 0; i < turmas.size(); i++) {
-                if (turmas.get(i).adicionarAluno(aluno)) {
-                    return true; 
-                }
-            }
-        
-            return false;
         }
 
-        public boolean removerAluno(Aluno aluno){
-            for (int i = 0; i < turmas.size(); i++) {
-                List<Aluno> alunos = turmas.get(i).getAlunos();
-                for (int x = 0; x < alunos.size(); x++) {
-                    if (alunos.get(x).getNome().equals(aluno.getNome())) {
-                        turmas.get(i).removerAluno(alunos.get(x));
-                        return true; 
-                    }
+        for (int i = 0; i < turmas.size(); i++) {
+            if (turmas.get(i).adicionarAluno(aluno)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removerAluno(Aluno aluno) {
+        for (int i = 0; i < turmas.size(); i++) {
+            List<Aluno> alunos = turmas.get(i).getAlunos();
+            for (int x = 0; x < alunos.size(); x++) {
+                if (alunos.get(x).getNome().equals(aluno.getNome())) {
+                    turmas.get(i).removerAluno(alunos.get(x));
+                    return true;
                 }
             }
-
-            return false;
         }
-        
+        return false;
+    }
 }
