@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.example.DAO.DaoAluno;
-import org.example.DAO.DaoCurso;
-import org.example.DAO.DaoDisciplinas;
-import org.example.DAO.DaoProfessor;
+import org.example.DAO.*;
 import org.example.Enum.TipoDisciplina;
 
 public class Main {
@@ -112,7 +109,8 @@ public class Main {
         return turmas;
     }
 
-    private static List<Turma> adicionarTurmas(Scanner s, int qtdTurmas, List<Turma> turmas) {
+    private static List<Turma> adicionarTurmas(Scanner s, int qtdTurmas, List<Turma> turmas, String disciplina) throws IOException {
+        DaoTurma daoTurma = new DaoTurma();
         for (int i = 1; i <= qtdTurmas; i++) {
             System.out.print("Digite o código da turma " + i + ": ");
             String codigo = s.next();
@@ -121,10 +119,13 @@ public class Main {
             String nomeProf = s.next();
 
             Professor professor = new Professor(null, nomeProf);
-            Turma turma = new Turma(codigo, professor, null, null);
+            Turma turma = new Turma(codigo, professor, new Disciplina(disciplina), "2024.2");
 
             turmas.add(turma);
+
+
             professor.adicionarTurma(turma);
+            daoTurma.adcionarTurma(turma);
 
         }
 
@@ -169,7 +170,7 @@ public class Main {
                     int qtdTurmas = s.nextInt();
 
                     List<Turma> turmas = new ArrayList<>();
-                    turmas = adicionarTurmas(s, qtdTurmas, turmas);
+                    turmas = adicionarTurmas(s, qtdTurmas, turmas, Dnome);
 
                     TipoDisciplina tipo = obterTipoDisciplina(s);
 
@@ -203,8 +204,10 @@ public class Main {
                 try {
                     List<Disciplina> disc = daoDisciplinas.getAllDisciplinas();
                     System.out.println("Disciplinas:");
+                    int i = 0;
                     for (Disciplina disciplina : disc) {
-                        System.out.println(disciplina.getNome());
+                        i++;
+                        System.out.println(i + " - " + disciplina.getNome());
                     }
                 } catch (Exception e) {
                     System.out.println("ERRO: Não foi possivel listar as disciplinas.");
@@ -241,7 +244,7 @@ public class Main {
                 }
 
                 System.out.println("Digite o nome da disciplina: ");
-                String Dnome = b.nextLine();
+                String Dnome = b.next();
 
                 Disciplina novaMatricula = daoDisciplinas.getDisciplinaBynome(Dnome);
                 if (novaMatricula == null) {
@@ -256,8 +259,11 @@ public class Main {
                 try {
                     System.out.print("Digite o nome da disciplina que deseja cancelar a matrícula: ");
                     String nomeDisciplina = b.next();
+                    System.out.print("Digite seu nome de matricula:  ");
+                    String nomeLogin = b.next();
                     Disciplina disciplina = new Disciplina(nomeDisciplina);
                     aluno.cancelarMatricula(disciplina);
+                    daoAluno.removerAluno(nomeLogin);
                 } catch (Exception e) {
                     System.out.println("ERRO: Não foi possível cancelar a matrícula.");
                 }
@@ -271,8 +277,9 @@ public class Main {
         }
     }
 
-    public static void menuProfessor(Professor prof) {
+    public static void menuProfessor(Professor prof) throws IOException {
         Scanner d = new Scanner(System.in);
+        DaoTurma daoTurma = new DaoTurma();
         System.out.println("\n[Professor: \n" + prof.getNome() + " - O que deseja fazer?]\n");
         System.out.println("1 - Ver alunos Matriculados\n");
         System.out.println("2 - Sair");
@@ -283,6 +290,7 @@ public class Main {
             case 1:
                 Disciplina DisciplinaProc = prof.getTurma().getDisciplina();
                 prof.checarAlunos(DisciplinaProc);
+                daoTurma.getTurmaByProfessor(prof.getNome());
                 break;
             case 2:
                 System.out.println("Voltando para o menu principal. . .");

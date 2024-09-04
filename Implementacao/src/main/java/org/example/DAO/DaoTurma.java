@@ -11,13 +11,13 @@ import java.util.List;
 import org.example.Turma;
 
 public class DaoTurma {
-    private static final String FILE_PATH = "Implementacao//src//main//java//org//example//Data//Turmas.txt";
+    private static final String FILE_PATH = "Enrollment-System\\Implementacao\\src\\main\\java\\org\\example\\Data\\Cursos.txt";
 
     public void adcionarTurma(Turma objTurma) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH));
 
-        String line = objTurma.getProfessor() + ", " + objTurma.getDisciplina().getNome() + " ,"
-                + objTurma.getAlunos().toString() + ".";
+        String line = objTurma.getProfessor().getNome() + ", " + objTurma.getDisciplina().getNome() + " ,";
+//                + objTurma.getAlunos().toString() + ".";
         bw.write(line);
         bw.newLine();
         bw.close();
