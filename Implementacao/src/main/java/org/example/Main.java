@@ -74,7 +74,8 @@ public class Main {
                     if (profLogado == null) {
                         System.out.print("Digite seu nome: ");
                         String nomeProf = scanner.nextLine();
-                        profLogado = daoProfessor.getByNome(nomeProf);
+                        profLogado = new Professor(nomeProf);
+                        daoProfessor.adicionarProfessor(profLogado); 
                         menuProfessor(profLogado);
                     }
                     break;

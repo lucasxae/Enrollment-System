@@ -11,6 +11,9 @@ public class Professor {
         this.turma = turma;
         this.nome = nome;
     }
+    public Professor(String nome) {
+        this.nome = nome;
+    }
 
     public Turma getTurma() {
         return turma;
