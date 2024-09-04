@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,7 +71,6 @@ public class Main {
             }
         }
     }
-
 
     private static List<Turma> lerTurmasDoArquivo(String filePath) {
         List<Turma> turmas = new ArrayList<>();
@@ -181,17 +179,17 @@ public class Main {
                     System.out.println("ERRO: Não foi possivel gerar o currículo.");
                 }
                 break;
-           case 4:
-    try {
-        List<Disciplina> disc = daoDisciplinas.getAllDisciplinas();
-        System.out.println("Disciplinas:");
-        for (Disciplina disciplina : disc) {
-            System.out.println(disciplina.getNome());
-        }
-    } catch (Exception e) {
-        System.out.println("ERRO: Não foi possivel listar as disciplinas.");
-    }
-    break;
+            case 4:
+                try {
+                    List<Disciplina> disc = daoDisciplinas.getAllDisciplinas();
+                    System.out.println("Disciplinas:");
+                    for (Disciplina disciplina : disc) {
+                        System.out.println(disciplina.getNome());
+                    }
+                } catch (Exception e) {
+                    System.out.println("ERRO: Não foi possivel listar as disciplinas.");
+                }
+                break;
             case 5:
                 System.out.println("Voltando para o menu principal. . .");
                 return;
