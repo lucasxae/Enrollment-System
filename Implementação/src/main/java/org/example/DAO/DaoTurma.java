@@ -29,7 +29,7 @@ public class DaoTurma {
         while ((linha = br.readLine()) != null) {
             String[] dados = linha.split(",");
             if (dados.length == 4) {
-                Turma t = new Turma(null ,dados[0], dados[3]);
+                Turma t = new Turma(dados[0],null,null,null);
                 turmas.add(t);
             }
         }
@@ -43,7 +43,7 @@ public class DaoTurma {
         String[] dados= line.split(", ");
         if(dados.length==4&&dados[0].equals(professor)){
             br.close();
-            return new Turma(null,dados[0],dados[2]);
+            return new Turma(dados[0],null,null,null);
         }
        }
        br.close();
@@ -55,20 +55,20 @@ public class DaoTurma {
         for(Turma turma:turmas){
             if(turma.getProfessor().equals(turmaUpdated.getProfessor())){
                 String alunos=String.join(", ",turmaUpdated.getAlunos().toString());
-                bw.write(turmaUpdated.getProfessor()+", "+turmaUpdated.getDisciplina().getNome());
+                bw.write(turmaUpdated.getProfessor()+", "+turmaUpdated.getDisciplina().getNome()+alunos);
             }else{
                 String alunos=String.join(", ",turma.getAlunos().toString());
-                bw.write(turma.getProfessor()+", "+turma.getDisciplina().getNome());
+                bw.write(turma.getProfessor()+", "+turma.getDisciplina().getNome()+alunos);
             }
             bw.newLine();
         }
         bw.close();
     }
-    public void excluirTurma(String professor)throws IOException{
+    public void excluirTurma(String codigo)throws IOException{
         List<Turma> turmas=getAllTurmas();
         BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH));
         for(Turma turma:turmas){
-          if(!turma.getProfessor().equals(professor)){
+          if(!turma.getCodigo().equals(codigo)){
             String alunos=String.join(", ", turma.getAlunos().toString());
             bw.write(turma.getProfessor()+", "+turma.getDisciplina().getNome()+", "+alunos);
             bw.newLine();

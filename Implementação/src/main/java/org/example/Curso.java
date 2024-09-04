@@ -6,6 +6,10 @@ public class Curso implements ICurriculo {
     private String nome;
     private double creditos;
     
+    public Curso(String nome, Double creditos){
+        this.creditos=creditos;
+        this.nome=nome;
+    }
     public String getNome() {
         return nome;
     }

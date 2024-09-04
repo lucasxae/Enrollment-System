@@ -32,7 +32,7 @@ public class DaoCurso {
         while((linha=br.readLine()) !=null){
             String[] dados=linha.split(", ",4);
             if(dados.length==4){
-                Curso ObjCurso= new Curso(dados[0]);
+                Curso ObjCurso= new Curso(dados[0],null);
                 cursos.add(ObjCurso);
                 
             }
@@ -48,7 +48,7 @@ public class DaoCurso {
            String[] dados= line.split(", ");
            if(dados[0].equals(nome)){
              br.close();
-             return new Curso(nome);
+             return new Curso(nome,null);
            }
         }
         return null;

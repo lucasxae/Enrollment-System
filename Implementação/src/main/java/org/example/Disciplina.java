@@ -14,11 +14,16 @@ public class Disciplina {
     private List<Turma> turmas;
     
     
-    public Disciplina(boolean aberta, Curso curso, TipoDisciplina tipo, List<Turma> turmas) {
+    public Disciplina(boolean aberta, Curso curso, TipoDisciplina tipo, List<Turma> turmas,String nome,Float cargahoraria) {
         this.aberta = aberta;
         this.curso = curso;
         this.tipo = tipo;
         this.turmas = turmas;
+        this.cargaHoraria=cargahoraria;
+        this.nome=nome;
+    }
+    public Disciplina(String nome){
+        this.nome=nome;
     }
 
     public String getNome() {

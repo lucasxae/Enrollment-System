@@ -8,6 +8,7 @@ public class Aluno {
     private Curso curso;
     private static int discipinaObrigatoria = 0;
     private static int disciplinaOptativa = 0;
+    
 
     public String getNome() {
         return nome;

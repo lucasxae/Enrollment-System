@@ -27,7 +27,7 @@ public class DaoProfessor {
         while((linha=br.readLine())!=null){
               String[] dados=linha.split(",");
         if(dados.length==4){
-            Professor objProf = new Professor(dados[0]);
+            Professor objProf = new Professor(null,dados[0]);
             professores.add(objProf);
         }
     }
@@ -41,7 +41,7 @@ public class DaoProfessor {
             String[] dados=linha.split(", ");
             if(dados.length==4 && dados[0].equals(nome)){
                 br.close();
-                return new Professor(dados[0]);
+                return new Professor(null,dados[0]);
             }
         }
         br.close();

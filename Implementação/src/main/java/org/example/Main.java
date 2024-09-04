@@ -1,7 +1,6 @@
 package org.example;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -86,8 +85,8 @@ public class Main {
                System.out.println("Digite o nome da disciplina");
                String Dnome=s.nextLine();
                System.out.println("Digite a carga horaria do curso");
-               double ch=s.nextDouble();
-               Disciplina nova= new Disciplina(cursoPrincipal,Dnome,ch);
+               Float ch=s.nextFloat();
+               Disciplina nova= new Disciplina(true,cursoPrincipal,null,null, Dnome,ch);
                cursoPrincipal.adicionarDisciplina(nova);
                daoDisciplinas.adicionarDisciplinas(nova);
                } catch (Exception e) {
@@ -99,17 +98,15 @@ public class Main {
                System.out.println("Digite o nome da disciplina que deseja excluir");
                Disciplina procurada=daoDisciplinas.getDisciplinaBynome(s.nextLine());
                daoDisciplinas.removerDisciplina(procurada.getNome());
-               cursoPrincipal.excluirDisciplina(procurada);
+               cursoPrincipal.removerDisciplina(procurada);
             }catch(Exception e){
                 System.out.println("Não foi possivel excluir esta disciplina");
             }
                case 3:
                try {
-                   System.out.println("Digite o nome do aluno");
-                   Aluno procurado=daoAluno.getByName(s.nextLine());
-                   cursoPrincipal.gerarCurriculoSemestral(procurado);
+                   cursoPrincipal.gerarCurriculoSemestral();
                } catch (Exception e) {
-                   System.out.println("Não foi possivel encontrar o aluno");
+                   System.out.println("Não foi possivel gerar curriculo");
                }
                break;
                case 4:
@@ -137,40 +134,35 @@ public class Main {
                 List<Disciplina> disciplinasDisponiveis=aluno.getCurso().getDisciplinas();
                 for(Disciplina disciplina: disciplinasDisponiveis){
                     System.out.println("Disciplina: "+disciplina.getNome());
-                }
-                try{
-                System.out.println("Qual disciplina deseja se matricular?");
-                Disciplina procurada;
-                String nomeDisciProcurada=b.nextLine();
-                for(Disciplina disciplina: disciplinasDisponiveis){
-                    if(disciplina.getNome().equals(nomeDisciProcurada)){
-                        procurada=disciplina;
-                        aluno.matricularDisciplina(procurada);
+                    String nomeDisciP=b.nextLine();
+                    for(Disciplina d: disciplinasDisponiveis){
+                        if(d.getNome().equals(nomeDisciP)){
+                            aluno.matricularDisciplina(d);
+                        }
                     }
-                }
+                try{
+                   
             }catch(Exception e){
                 System.out.println("Não foi possivel cadastrar na disciplina");
             }
-                break;
+        }
+        break;
             case 2:
             try {
-                List<Turma> turmasAluno=aluno.getTurmas();
-                List<Disciplina> disciplinasMatriculadas=new ArrayList<>();
-                for(Turma turma:turmasAluno){
-                    disciplinasMatriculadas.add(turma.getDisciplina());
+                  List<Disciplina> disciplinasDocurso=aluno.getCurso().getDisciplinas();
+                  for(Disciplina disciplinaP:disciplinasDocurso){
+                    List<Turma> listaDeTurmas=disciplinaP.getTurmas();
+                    for (Turma turma:listaDeTurmas) {
+                        List<Aluno>alunos=turma.getAlunos();
+                        for(Aluno procurado:alunos){
+                            if(procurado.getNome().equals(aluno.getNome())){
+                                procurado=aluno;
+                                procurado.matricularDisciplina(disciplinaP);
+                        }
+                    }
                 }
-                for(Disciplina disciplina:disciplinasMatriculadas){
-                    System.out.println("Disciplina: "+disciplina.getNome());
-                }
-                System.out.println("Digite qual disciplina deseja excluir ?");
-                String disciplinaNome=b.nextLine();
-                Disciplina procurada;
-                for(Disciplina disciplina:disciplinasMatriculadas){
-                     if(disciplina.getNome().equals(disciplinaNome)){
-                        procurada=disciplina;
-                        aluno.cancelarMatricula(procurada);
-                     }
-                }
+            }
+                
             } catch (Exception e) {
                 System.out.println("Não foi possivel desmatricular desta disciplina");
             }

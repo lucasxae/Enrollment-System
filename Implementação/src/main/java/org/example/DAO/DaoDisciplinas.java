@@ -15,7 +15,7 @@ public class DaoDisciplinas {
 
     public void adicionarDisciplinas(Disciplina objDisciplina) throws IOException{
         BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH,true));
-        String line= objDisciplina.getNome()+", "+objDisciplina.getTipo()+", "+objDisciplina.getVagas()+".";
+        String line= objDisciplina.getNome()+", "+objDisciplina.getTipo()+", "+", "+objDisciplina.getCargaHoraria()+", "+objDisciplina.getCurso().getNome()+", "+objDisciplina.getTurmas().toString();
         bw.write(line);
         bw.newLine();
         bw.close();
@@ -55,9 +55,10 @@ public void atualizarDisciplina(Disciplina disciplinaUpdated) throws IOException
     BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH));
     for(Disciplina disciplina:disciplinas){
       if(disciplina.getNome().equals(disciplinaUpdated.getNome())){
-        bw.write(disciplinaUpdated.getNome()+", "+disciplinaUpdated.getTipo()+", "+disciplinaUpdated.getVagas());
+        bw.write(disciplinaUpdated.getNome()+", "+disciplinaUpdated.getTipo()+", "+disciplinaUpdated.getCargaHoraria()+", "
+        +disciplinaUpdated.getCurso().getNome());
       }else{
-        bw.write(disciplina.getNome()+", "+disciplina.getTipo()+", "+disciplina.getVagas());
+        bw.write(disciplina.getNome()+", "+disciplina.getTipo()+", "+disciplina.getCargaHoraria()+", "+disciplina.getCurso().getNome());
       }
     }
     bw.close();
@@ -67,7 +68,7 @@ public void removerDisciplina(String nome)throws IOException {
     BufferedWriter bw= new BufferedWriter(new FileWriter(FILE_PATH));
     for(Disciplina disciplina: disciplinas){
         if(!disciplina.getNome().equals(nome)){
-            bw.write(disciplina.getNome()+", "+disciplina.getTipo()+", "+disciplina.getVagas());
+            bw.write(disciplina.getNome()+", "+disciplina.getTipo()+", "+disciplina.getCargaHoraria()+", "+disciplina.getCurso().getNome());
             bw.newLine();
         }
     }

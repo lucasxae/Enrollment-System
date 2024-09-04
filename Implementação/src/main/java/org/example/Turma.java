@@ -1,5 +1,6 @@
 package org.example;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,13 +16,14 @@ public class Turma {
     private StatusTurma status;
     private static int minAlunos = 3;
     private static int maxAlunos = 60;
+    
 
-    public String getCodigo() { 
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public Turma(String codigo, Professor prof,Disciplina disciplina, String semestre){
+        this.alunos=null;
+        this.disciplina=disciplina;
+        this.professor=prof;
+        this.codigo=codigo;
+        this.semestre=semestre;
     }
     
     public Professor getProfessor() {
@@ -58,6 +60,9 @@ public class Turma {
 
     public Date getAno() {
         return ano;
+    }
+    public String getCodigo(){
+        return this.codigo;
     }
 
     public void setAno(Date ano) {
