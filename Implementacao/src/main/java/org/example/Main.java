@@ -43,13 +43,35 @@ public class Main {
                     menuCurso(cursoPrincipal);
                     break;
                 case 2:
-                    if (alunoLogado == null) {
-                        System.out.print("Digite seu nome: ");
-                        String nomeAluno = scanner.nextLine();
-                        alunoLogado = new Aluno(nomeAluno);
-                        alunoLogado.setCurso(cursoPrincipal);
-                        menuAluno(alunoLogado);
+                if (alunoLogado == null) {
+                    System.out.print("Digite seu nome: ");
+                    String nomeAluno = scanner.nextLine();
+                    alunoLogado = daoAluno.getByName(nomeAluno);
+                    if(alunoLogado==null){
+                        System.out.println("Aluno não encontrado no sistema (1- Para efetuar cadastro|2- Para sair)");
+                        int op=scanner.nextInt();
+                        scanner.nextLine();
+                        switch(op){
+                            case 1:
+                            System.out.println("Digite seu nome");
+                            String nomeAl=scanner.nextLine();
+
+                            Aluno novo= new Aluno(cursoPrincipal, nomeAl);
+                            daoAluno.adicionarAluno(novo);
+                            novo.setCurso(cursoPrincipal);
+                            System.out.println("Cadastro efetuado");
+                            return;
+
+                            case 2:
+                            return ;
+                            default:
+                            System.out.println("Opção invalida");
+                        }
+                    }else{
                     }
+                    alunoLogado.setCurso(cursoPrincipal);
+                    menuAluno(alunoLogado);
+                }
                     break;
                 case 3:
                     if (profLogado == null) {
